@@ -1,0 +1,207 @@
+﻿OUR PLACE IN SPACE
+Website copy — grouped by section
+Source: Stile Designer Task Brief — “Our Place in Space”
+Note: The brief says the site title, section headings, body copy, quiz wording and planet data are fixed. Wording below is transcribed from the brief; layout/illustration instructions are not included.
+
+============================================================
+SITE-WIDE
+============================================================
+
+Site name
+Our Place in Space
+
+Navigation
+The Solar System
+Explore
+Quiz
+
+============================================================
+HERO
+============================================================
+
+Headline
+The Solar System
+
+Subheading
+Eight planets, one star and a whole lot of space. Come and take a look around.
+
+============================================================
+SECTION 1 — WHAT IS THE SOLAR SYSTEM?
+============================================================
+
+Heading
+What is the Solar System?
+
+Body copy
+When we look up at the night sky, we see thousands of stars. A star is a giant, hot ball of gas that makes its own light and heat. The Sun is a star, and it is the only star in our Solar System.
+
+The Sun, and everything that travels around it, is called the Solar System. That includes Earth and seven other planets, along with moons, asteroids and other objects. The Sun sits at the centre, and its pull keeps the planets travelling around it.
+
+In order from the Sun, the eight planets are Mercury, Venus, Earth, Mars, Jupiter, Saturn, Uranus and Neptune. They can be sorted into three groups:
+
+Rocky planets: Mercury, Venus, Earth and Mars are made mostly of rock and metal.
+
+Gas planets: Jupiter and Saturn are made mostly of gas.
+
+Ice planets: Uranus and Neptune are made mostly of icy materials.
+
+============================================================
+MNEMONIC CALLOUT
+============================================================
+
+Heading
+A trick for remembering the order
+
+Body copy
+It can be hard to remember the order of the planets. A mnemonic can help. A mnemonic is a phrase where the first letter of each word matches the first letter of each planet, in order from the Sun. For example:
+
+My Very Educated Mother Just Served Us Nachos
+
+Mercury, Venus, Earth, Mars, Jupiter, Saturn, Uranus, Neptune.
+
+============================================================
+SECTION 2 — EXPLORE THE SOLAR SYSTEM
+============================================================
+
+Heading
+Explore the Solar System
+
+Body copy
+Now it's your turn to explore. Click on each planet to find out what it's like: how far it is from the Sun, how long its year lasts and how strong its gravity is.
+
+Visit every planet, then see how much you remember in the quiz below.
+
+============================================================
+SECTION 3 — QUIZ
+============================================================
+
+Heading
+Test yourself
+
+Introduction
+Three quick questions. How much do you remember?
+
+Question 1 — Multiple choice
+Which of these planets are rocky planets?
+
+Jupiter and Saturn
+Mercury, Venus, Earth and Mars
+Uranus and Neptune
+All eight planets
+
+Question 2 — True or false
+The Sun is a planet.
+
+True
+False
+I'm not sure
+
+Question 3 — Written answer
+In your own words, describe what the Solar System is.
+
+============================================================
+FOOTER
+============================================================
+
+Our Place in Space is made by Stile Education. Planet data from the NASA Planetary Fact Sheet.
+
+============================================================
+EXPLORER CONTENT — PLANET DATA
+============================================================
+
+The brief says you do not have to show every data column; select what serves the design. Gravity is relative to Earth, so 0.38 means you would weigh 38% of your Earth weight. Distance and temperature are averages. Figures are rounded.
+
+Mercury
+Order from Sun: 1
+Type: Rocky
+Diameter: 4,879 km
+Distance from Sun: 58 million km
+Length of year: 88 Earth days
+Gravity: 0.38 (Earth = 1)
+Moons: 0
+Average temperature: 167 °C
+Memorable fact: About the same size as Earth's Moon. Has no air to trap heat, so nights are freezing even though days are scorching.
+
+Venus
+Order from Sun: 2
+Type: Rocky
+Diameter: 12,104 km
+Distance from Sun: 108 million km
+Length of year: 225 Earth days
+Gravity: 0.91 (Earth = 1)
+Moons: 0
+Average temperature: 464 °C
+Memorable fact: The hottest planet, even though Mercury is closer to the Sun. Thick clouds trap the heat.
+
+Earth
+Order from Sun: 3
+Type: Rocky
+Diameter: 12,756 km
+Distance from Sun: 150 million km
+Length of year: 365 Earth days
+Gravity: 1.00 (Earth = 1)
+Moons: 1
+Average temperature: 15 °C
+Memorable fact: The only planet we know of with liquid water on its surface, and with life.
+
+Mars
+Order from Sun: 4
+Type: Rocky
+Diameter: 6,792 km
+Distance from Sun: 228 million km
+Length of year: 687 Earth days
+Gravity: 0.38 (Earth = 1)
+Moons: 2
+Average temperature: −65 °C
+Memorable fact: Looks red because its dusty surface is full of rusty iron. Home to the tallest volcano in the Solar System.
+
+Jupiter
+Order from Sun: 5
+Type: Gas
+Diameter: 142,984 km
+Distance from Sun: 779 million km
+Length of year: 4,331 Earth days (about 12 years)
+Gravity: 2.36 (Earth = 1)
+Moons: 95+
+Average temperature: −110 °C
+Memorable fact: The largest planet. One of its storms, the Great Red Spot, is wider than Earth.
+
+Saturn
+Order from Sun: 6
+Type: Gas
+Diameter: 120,536 km
+Distance from Sun: 1,432 million km
+Length of year: 10,747 Earth days (about 29 years)
+Gravity: 0.92 (Earth = 1)
+Moons: 270+
+Average temperature: −140 °C
+Memorable fact: Its rings are made of billions of pieces of ice and rock. It has more moons than any other planet.
+
+Uranus
+Order from Sun: 7
+Type: Ice
+Diameter: 51,118 km
+Distance from Sun: 2,867 million km
+Length of year: 30,589 Earth days (about 84 years)
+Gravity: 0.89 (Earth = 1)
+Moons: 28
+Average temperature: −195 °C
+Memorable fact: Spins on its side, so each pole has 42 years of daylight followed by 42 years of darkness.
+
+Neptune
+Order from Sun: 8
+Type: Ice
+Diameter: 49,528 km
+Distance from Sun: 4,515 million km
+Length of year: 59,800 Earth days (about 165 years)
+Gravity: 1.12 (Earth = 1)
+Moons: 16
+Average temperature: −200 °C
+Memorable fact: The windiest planet. Its winds can reach over 2,000 km/h.
+
+============================================================
+SOURCE CREDIT
+============================================================
+
+Planet data source: NASA Planetary Fact Sheet
+

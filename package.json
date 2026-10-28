@@ -1,0 +1,9 @@
+{
+  "name": "our-place-in-space",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A local microsite exploring the Solar System",
+  "scripts": {
+    "start": "node server.js"
+  }
+}

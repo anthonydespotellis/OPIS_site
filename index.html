@@ -1,0 +1,236 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#10072c">
+  <meta name="description" content="Explore the Solar System, meet the eight planets and test what you know.">
+  <title>Our Place in Space &#8212; The Solar System</title>
+  <link rel="preload" href="Website%20build%20assets/Fonts/Gabarito/Gabarito-VariableFont_wght.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="preload" href="Website%20build%20assets/Fonts/Figtree/Figtree-VariableFont_wght.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="hero" id="top">
+    <nav class="site-nav" aria-label="Main navigation">
+      <a class="brand" href="#top" aria-label="Our Place in Space home">Our Place <span>in Space</span></a>
+      <div class="nav-links">
+        <a href="#solar-system">The Solar System</a>
+        <a href="#explore">Explore</a>
+        <a href="#quiz">Quiz</a>
+      </div>
+    </nav>
+    <div class="hero-copy">
+      <span class="hero-sparkle hero-sparkle-one" aria-hidden="true">✦</span>
+      <span class="hero-sparkle hero-sparkle-two" aria-hidden="true">✧</span>
+      <span class="hero-sparkle hero-sparkle-three" aria-hidden="true">✦</span>
+      <span class="hero-sparkle hero-sparkle-four" aria-hidden="true">✧</span>
+      <h1>The Solar System</h1>
+      <p>Eight planets, one star and a whole lot of space.<br>Come and take a look around.</p>
+    </div>
+    <div class="hero-planet hero-venus" aria-hidden="true"><img src="Website%20build%20assets/planets%20svgs/Just%20planet/Planet-Venus.svg" alt=""></div>
+    <div class="hero-planet hero-earth" aria-hidden="true"><img src="Website%20build%20assets/planets%20svgs/Just%20planet/Planet-Earth.svg" alt=""></div>
+  </header>
+
+  <main>
+    <section class="paper-section intro-section" id="solar-system">
+      <div class="section-heading">
+        <h2>What is the Solar System?</h2>
+      </div>
+      <div class="intro-copy">
+        <p>When we look up at the night sky, we see thousands of stars. A star is a giant, hot ball of gas that makes its own light and heat. The Sun is a star, and it is the only star in our Solar System.</p>
+        <p>The Sun, and everything that travels around it, is called the Solar System. That includes Earth and seven other planets, along with moons, asteroids and other objects. The Sun sits at the centre, and its pull keeps the planets travelling around it.</p>
+        <p><strong>In order from the Sun, the eight planets are Mercury, Venus, Earth, Mars, Jupiter, Saturn, Uranus and Neptune.</strong></p>
+      </div>
+      <div class="solar-line" role="group" aria-label="Put the planets in order from the Sun">
+        <div class="sun-marker"><img src="Website%20build%20assets/planets%20svgs/Just%20planet/Sun.svg" alt="Sun"><span>Sun</span></div>
+        <div class="planet-sort-board">
+          <div class="planet-sort-tray" role="group" aria-label="Planets to drag into order">
+            <div class="planet-source-cell"><button class="sortable-planet planet-ice" type="button" data-planet="Neptune" data-order="8" style="--planet-size:60px" aria-label="Neptune, drag to its place"><img src="Website%20build%20assets/planets%20svgs/Just%20planet/Planet-Neptune.svg" alt=""><span>Neptune</span></button></div>
+            <div class="planet-source-cell"><button class="sortable-planet planet-rock" type="button" data-planet="Mars" data-order="4" style="--planet-size:54px" aria-label="Mars, drag to its place"><img src="Website%20build%20assets/planets%20svgs/Just%20planet/Planet-Mars.svg" alt=""><span>Mars</span></button></div>
+            <div class="planet-source-cell"><button class="sortable-planet planet-rock" type="button" data-planet="Venus" data-order="2" style="--planet-size:60px" aria-label="Venus, drag to its place"><img src="Website%20build%20assets/planets%20svgs/Just%20planet/Planet-Venus.svg" alt=""><span>Venus</span></button></div>
+            <div class="planet-source-cell"><button class="sortable-planet planet-gas" type="button" data-planet="Jupiter" data-order="5" style="--planet-size:84px" aria-label="Jupiter, drag to its place"><img src="Website%20build%20assets/planets%20svgs/Just%20planet/Planet-Jupiter.svg" alt=""><span>Jupiter</span></button></div>
+            <div class="planet-source-cell"><button class="sortable-planet planet-rock" type="button" data-planet="Mercury" data-order="1" style="--planet-size:60px" aria-label="Mercury, drag to its place"><img src="Website%20build%20assets/planets%20svgs/Just%20planet/Planet-Mercury.svg" alt=""><span>Mercury</span></button></div>
+            <div class="planet-source-cell"><button class="sortable-planet planet-ice" type="button" data-planet="Uranus" data-order="7" style="--planet-size:76px" aria-label="Uranus, drag to its place"><img src="Website%20build%20assets/planets%20svgs/Just%20planet/Planet-Uranus.svg" alt=""><span>Uranus</span></button></div>
+            <div class="planet-source-cell"><button class="sortable-planet planet-gas" type="button" data-planet="Saturn" data-order="6" style="--planet-size:106px" aria-label="Saturn, drag to its place"><img src="Website%20build%20assets/planets%20svgs/Just%20planet/Planet-Saturn.svg" alt=""><span>Saturn</span></button></div>
+            <div class="planet-source-cell"><button class="sortable-planet planet-rock" type="button" data-planet="Earth" data-order="3" style="--planet-size:60px" aria-label="Earth, drag to its place"><img src="Website%20build%20assets/planets%20svgs/Just%20planet/Planet-Earth.svg" alt=""><span>Earth</span></button></div>
+          </div>
+          <div class="planet-sort-targets" role="group" aria-label="Planet positions in order from the Sun">
+            <div class="planet-target-cell" data-slot="1"><button class="planet-dropzone" style="--planet-size:60px" type="button" aria-label="Position 1, closest to the Sun"><span class="sr-only">1st planet from the Sun</span></button></div>
+            <div class="planet-target-cell" data-slot="2"><button class="planet-dropzone" style="--planet-size:60px" type="button" aria-label="Position 2 from the Sun"><span class="sr-only">2nd planet from the Sun</span></button></div>
+            <div class="planet-target-cell" data-slot="3"><button class="planet-dropzone" style="--planet-size:60px" type="button" aria-label="Position 3 from the Sun"><span class="sr-only">3rd planet from the Sun</span></button></div>
+            <div class="planet-target-cell" data-slot="4"><button class="planet-dropzone" style="--planet-size:54px" type="button" aria-label="Position 4 from the Sun"><span class="sr-only">4th planet from the Sun</span></button></div>
+            <div class="planet-target-cell" data-slot="5"><button class="planet-dropzone" style="--planet-size:84px" type="button" aria-label="Position 5 from the Sun"><span class="sr-only">5th planet from the Sun</span></button></div>
+            <div class="planet-target-cell" data-slot="6"><button class="planet-dropzone" style="--planet-size:106px" type="button" aria-label="Position 6 from the Sun"><span class="sr-only">6th planet from the Sun</span></button></div>
+            <div class="planet-target-cell" data-slot="7"><button class="planet-dropzone" style="--planet-size:76px" type="button" aria-label="Position 7 from the Sun"><span class="sr-only">7th planet from the Sun</span></button></div>
+            <div class="planet-target-cell" data-slot="8"><button class="planet-dropzone" style="--planet-size:60px" type="button" aria-label="Position 8, farthest from the Sun"><span class="sr-only">8th planet from the Sun</span></button></div>
+          </div>
+        </div>
+        <p class="planet-sort-status" aria-live="polite">Drag each planet into its correct place from the Sun.</p>
+      </div>
+      <p class="group-intro">They can be sorted into three groups:</p>
+      <div class="planet-groups">
+        <div class="group-unit rock-group">
+          <img class="group-art" src="Website%20build%20assets/Themed%20boxes/theme%20-%20Rock.svg" alt="">
+          <button class="group-trigger" type="button" aria-expanded="false" aria-controls="rock-group-details" aria-label="Reveal rocky planets">
+            <span class="group-click-cue"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 3l15 11-6.1 1-2.7 6.1L4 3z"/></svg><span>Reveal</span></span>
+          </button>
+          <article class="group-card rock-card" id="rock-group-details" aria-labelledby="rock-group-title" hidden>
+            <div class="group-text"><button class="group-close" type="button" aria-label="Close rocky planets details"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button><h3 id="rock-group-title">Rocky planets</h3><p>Mercury, Venus, Earth and Mars are made mostly of rock and metal.</p></div>
+          </article>
+        </div>
+        <div class="group-unit gas-group">
+          <img class="group-art" src="Website%20build%20assets/Themed%20boxes/theme%20-%20Gas.svg" alt="">
+          <button class="group-trigger" type="button" aria-expanded="false" aria-controls="gas-group-details" aria-label="Reveal gas planets">
+            <span class="group-click-cue"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 3l15 11-6.1 1-2.7 6.1L4 3z"/></svg><span>Reveal</span></span>
+          </button>
+          <article class="group-card gas-card" id="gas-group-details" aria-labelledby="gas-group-title" hidden>
+            <div class="group-text"><button class="group-close" type="button" aria-label="Close gas planets details"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button><h3 id="gas-group-title">Gas planets</h3><p>Jupiter and Saturn are<br>made mostly of gas.</p></div>
+          </article>
+        </div>
+        <div class="group-unit ice-group">
+          <img class="group-art" src="Website%20build%20assets/Themed%20boxes/theme%20-%20Ice.svg" alt="">
+          <button class="group-trigger" type="button" aria-expanded="false" aria-controls="ice-group-details" aria-label="Reveal ice planets">
+            <span class="group-click-cue"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 3l15 11-6.1 1-2.7 6.1L4 3z"/></svg><span>Reveal</span></span>
+          </button>
+          <article class="group-card ice-card" id="ice-group-details" aria-labelledby="ice-group-title" hidden>
+            <div class="group-text"><button class="group-close" type="button" aria-label="Close ice planets details"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button><h3 id="ice-group-title">Ice planets</h3><p>Uranus and Neptune are made mostly of icy materials.</p></div>
+          </article>
+        </div>
+      </div>
+      <button class="mnemonic-banner" type="button" data-open-mnemonic aria-haspopup="dialog">
+        <img src="Website%20build%20assets/Nacho%20planet.svg" alt="">
+        <span><strong>A trick for remembering the order</strong></span>
+        <span class="banner-arrow" aria-hidden="true">&#8599;</span>
+      </button>
+    </section>
+
+    <section class="explore-section space-section" id="explore">
+      <div class="explorer is-card-hidden" aria-label="Interactive Solar System explorer">
+        <div class="explore-heading">
+          <h2>Explore the Solar System</h2>
+          <p>Now it's your turn to explore. Click on each planet to find out what it's like: how far it is from the Sun, how long its year lasts and how strong its gravity is.</p>
+          <p>Visit every planet, then see how much you remember in the quiz below.</p>
+        </div>
+        <div class="carousel-stage" id="carousel-stage" role="group" aria-roledescription="interactive carousel" aria-label="Drag to rotate the Solar System. Choose a planet to see its details." tabindex="0">
+          <div class="carousel-origin" aria-hidden="true">
+            <img class="carousel-sun" src="Website%20build%20assets/planets%20svgs/Just%20planet/Sun.svg" alt="">
+          </div>
+          <div class="orbit-ring" data-orbit="0" aria-hidden="true"></div>
+          <div class="orbit-ring" data-orbit="1" aria-hidden="true"></div>
+          <div class="orbit-ring" data-orbit="2" aria-hidden="true"></div>
+          <div class="orbit-ring" data-orbit="3" aria-hidden="true"></div>
+          <div class="orbit-ring" data-orbit="4" aria-hidden="true"></div>
+          <div class="orbit-ring" data-orbit="5" aria-hidden="true"></div>
+          <div class="orbit-ring" data-orbit="6" aria-hidden="true"></div>
+          <div class="orbit-ring" data-orbit="7" aria-hidden="true"></div>
+          <svg class="distance-guide" id="distance-guide" aria-hidden="true" hidden><line id="distance-guide-line"></line></svg>
+          <div class="distance-callout" id="distance-callout" aria-live="polite" hidden><small>Distance from Sun</small><strong id="distance-callout-value">150 million km</strong></div>
+          <button class="orbit-planet" type="button" data-planet="Mercury" data-orbit="0" aria-pressed="false" aria-label="Select Mercury, planet 1 of 8" style="--planet-size:24px"><img src="Website%20build%20assets/planets%20svgs/Just%20planet/Planet-Mercury.svg" alt=""><span class="orbit-planet-label">Mercury</span></button>
+          <button class="orbit-planet" type="button" data-planet="Venus" data-orbit="1" aria-pressed="false" aria-label="Select Venus, planet 2 of 8" style="--planet-size:28px"><img src="Website%20build%20assets/planets%20svgs/Just%20planet/Planet-Venus.svg" alt=""><span class="orbit-planet-label">Venus</span></button>
+          <button class="orbit-planet" type="button" data-planet="Earth" data-orbit="2" aria-pressed="false" aria-label="Select Earth, planet 3 of 8" style="--planet-size:32px"><img src="Website%20build%20assets/planets%20svgs/Just%20planet/Planet-Earth.svg" alt=""><span class="orbit-planet-label">Earth</span></button>
+          <button class="orbit-planet" type="button" data-planet="Mars" data-orbit="3" aria-pressed="false" aria-label="Select Mars, planet 4 of 8" style="--planet-size:28px"><img src="Website%20build%20assets/planets%20svgs/Just%20planet/Planet-Mars.svg" alt=""><span class="orbit-planet-label">Mars</span></button>
+          <button class="orbit-planet" type="button" data-planet="Jupiter" data-orbit="4" aria-pressed="false" aria-label="Select Jupiter, planet 5 of 8" style="--planet-size:44px"><img src="Website%20build%20assets/planets%20svgs/Just%20planet/Planet-Jupiter.svg" alt=""><span class="orbit-planet-label">Jupiter</span></button>
+          <button class="orbit-planet" type="button" data-planet="Saturn" data-orbit="5" aria-pressed="false" aria-label="Select Saturn, planet 6 of 8" style="--planet-size:54px"><img src="Website%20build%20assets/planets%20svgs/Just%20planet/Planet-Saturn.svg" alt=""><span class="orbit-planet-label">Saturn</span></button>
+          <button class="orbit-planet" type="button" data-planet="Uranus" data-orbit="6" aria-pressed="false" aria-label="Select Uranus, planet 7 of 8" style="--planet-size:36px"><img src="Website%20build%20assets/planets%20svgs/Just%20planet/Planet-Uranus.svg" alt=""><span class="orbit-planet-label">Uranus</span></button>
+          <button class="orbit-planet" type="button" data-planet="Neptune" data-orbit="7" aria-pressed="false" aria-label="Select Neptune, planet 8 of 8" style="--planet-size:34px"><img src="Website%20build%20assets/planets%20svgs/Just%20planet/Planet-Neptune.svg" alt=""><span class="orbit-planet-label">Neptune</span></button>
+        </div>
+        <div class="planet-info-placeholder"><p class="carousel-hint">Hover to pause &#183; Drag to rotate &#183; Click to explore</p></div>
+        <article class="planet-info" aria-live="polite" aria-atomic="true" hidden>
+          <div class="planet-title-row">
+            <h3 id="planet-name"><button class="read-aloud-button planet-title-speaker" type="button" aria-label="Read the Earth planet card aloud" aria-pressed="false" title="Read the planet card aloud"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3.5 8v4h3l4 3V5l-4 3h-3Z"/><path d="M13 7.2a4 4 0 0 1 0 5.6M15 5a7 7 0 0 1 0 10"/></svg></button><span class="planet-name-label">Earth</span></h3>
+            <div class="planet-category"><img id="type-art" src="Website%20build%20assets/Themed%20boxes/theme%20-%20Rock.svg" alt=""><span class="planet-type" id="planet-type">ROCKY PLANET</span></div>
+          </div>
+          <div class="gravity-pose">
+            <div class="planet-weight-result">
+              <div class="astronaut-tint-wrap"><img class="gravity-astronaut" src="Website%20build%20assets/Astro%20character%20standing.svg" alt="Astronaut standing at Earth gravity"></div>
+              <small>Your weight here</small>
+              <output id="planet-weight-value" aria-live="polite">60 kg</output>
+            </div>
+            <div class="gravity-details">
+              <div class="gravity-stat"><small>Gravity</small><strong id="gravity-value">1.00&#215; Earth</strong></div>
+              <label class="earth-weight-control" for="earth-weight-slider">
+                <span><span>Your Earth weight</span><output id="earth-weight-value">60 kg</output></span>
+                <div class="weight-slider-control">
+                  <input id="earth-weight-slider" type="range" min="30" max="150" step="1" value="60" aria-label="Set your Earth weight in kilograms">
+                  <small class="weight-slider-hint">Drag</small>
+                </div>
+              </label>
+            </div>
+          </div>
+          <dl class="planet-stats">
+            <div><dt>Length of year</dt><dd id="year-value">365 Earth days</dd></div>
+            <div><dt>Moons</dt><dd id="moons-value">1</dd></div>
+          </dl>
+          <p class="planet-fact" id="planet-fact">The only planet we know of with liquid water on its surface, and with life.</p>
+          <div class="temperature-meter"><div class="meter-label"><span>Temperature</span><strong id="temperature-label">15&#176;C</strong></div><div class="meter-track"><span id="temperature-marker"></span></div><div class="meter-scale"><span>Hotter</span><span>Colder</span></div></div>
+        </article>
+      </div>
+      <p class="scale-note">Planet sizes and orbital distances are stylised and not to scale.</p>
+    </section>
+
+    <section class="quiz-section paper-section" id="quiz">
+      <div class="quiz-heading">
+        <h2>Test yourself</h2>
+        <p>Three quick questions. How much do you remember?</p>
+      </div>
+      <form id="quiz-form" class="quiz-list">
+        <fieldset class="quiz-card" data-question="1">
+          <legend><span class="question-number">1</span>Which of these planets are rocky planets?</legend>
+          <label><input type="radio" name="rocky" value="wrong"><span>Jupiter and Saturn</span></label>
+          <label><input type="radio" name="rocky" value="right"><span>Mercury, Venus, Earth and Mars</span></label>
+          <label><input type="radio" name="rocky" value="wrong"><span>Uranus and Neptune</span></label>
+          <label><input type="radio" name="rocky" value="wrong"><span>All eight planets</span></label>
+          <p class="quiz-feedback" aria-live="polite"></p>
+        </fieldset>
+        <fieldset class="quiz-card" data-question="2">
+          <legend><span class="question-number">2</span>The Sun is a planet.</legend>
+          <div class="sun-question-interaction">
+            <div class="sun-drag-source">
+              <button class="sun-drag-button" type="button" aria-pressed="false" aria-label="Sun. Drag it to an answer circle and leave it there, or activate it and choose an answer. Drag again to change your answer.">
+                <img src="Website%20build%20assets/planets%20svgs/Just%20planet/Sun.svg" alt="" draggable="false">
+              </button>
+              <span>Drag the Sun</span>
+            </div>
+            <div class="sun-answer-options" role="group" aria-label="Choose your answer">
+              <label class="sun-answer-target"><input type="radio" name="sun" value="wrong"><span class="answer-circle" aria-hidden="true"></span><span>True</span></label>
+              <label class="sun-answer-target"><input type="radio" name="sun" value="right"><span class="answer-circle" aria-hidden="true"></span><span>False</span></label>
+              <label class="sun-answer-target"><input type="radio" name="sun" value="unsure"><span class="answer-circle" aria-hidden="true"></span><span>I don't know</span></label>
+            </div>
+          </div>
+          <p class="sr-only" id="sun-interaction-status" aria-live="polite"></p>
+          <p class="quiz-feedback" aria-live="polite"></p>
+        </fieldset>
+        <fieldset class="quiz-card written-card" data-question="3">
+          <legend><span class="question-number">3</span>In your own words, describe what the Solar System is.</legend>
+          <label class="sr-only" for="written-answer">Your answer</label>
+          <textarea id="written-answer" rows="3" placeholder="The Solar System is..."></textarea>
+          <p class="quiz-feedback" aria-live="polite"></p>
+        </fieldset>
+        <div class="quiz-actions"><button type="submit" class="primary-button">Check my answers <span aria-hidden="true">&#8594;</span></button><p id="quiz-result" aria-live="polite"></p></div>
+      </form>
+    </section>
+  </main>
+
+  <footer class="site-footer"><a class="brand" href="#top">Our Place <span>in Space</span></a><p>Our Place in Space is made by Stile Education.<br>Planet data from the NASA Planetary Fact Sheet.</p><a class="back-top" href="#top">Back to the top &#8593;</a></footer>
+
+  <dialog class="mnemonic-dialog" id="mnemonic-dialog" aria-labelledby="dialog-title">
+    <button class="dialog-close" type="button" aria-label="Close mnemonic" data-close-dialog>&#215;</button>
+    <p class="mnemonic-copy mnemonic-lead">It can be hard to remember the order of the planets.</p>
+    <p class="mnemonic-copy mnemonic-explainer">A mnemonic can help. A mnemonic is a phrase where the first letter of each word<br>matches the first letter of each planet, in order from the Sun.</p>
+    <h2 class="mnemonic-phrase" id="dialog-title">For example: <span class="mnemonic-example-phrase"><span class="mnemonic-initial">M</span>y <span class="mnemonic-initial">V</span>ery <span class="mnemonic-initial">E</span>ducated <span class="mnemonic-initial">M</span>other <span class="mnemonic-initial">J</span>ust <span class="mnemonic-initial">S</span>erved <span class="mnemonic-initial">U</span>s <span class="mnemonic-initial">N</span>achos</span></h2>
+    <img class="dialog-family" src="Website%20build%20assets/Mum%20Nachos.svg" alt="A mother serving nachos to two children">
+    <div class="dialog-planet-row" aria-label="The planets in order from the Sun">
+      <div><img src="Website%20build%20assets/planets%20svgs/Just%20planet/Planet-Mercury.svg" alt=""><span>Mercury</span></div>
+      <div><img src="Website%20build%20assets/planets%20svgs/Just%20planet/Planet-Venus.svg" alt=""><span>Venus</span></div>
+      <div><img src="Website%20build%20assets/planets%20svgs/Just%20planet/Planet-Earth.svg" alt=""><span>Earth</span></div>
+      <div><img src="Website%20build%20assets/planets%20svgs/Just%20planet/Planet-Mars.svg" alt=""><span>Mars</span></div>
+      <div><img src="Website%20build%20assets/planets%20svgs/Just%20planet/Planet-Jupiter.svg" alt=""><span>Jupiter</span></div>
+      <div><img src="Website%20build%20assets/planets%20svgs/Just%20planet/Planet-Saturn.svg" alt=""><span>Saturn</span></div>
+      <div><img src="Website%20build%20assets/planets%20svgs/Just%20planet/Planet-Uranus.svg" alt=""><span>Uranus</span></div>
+      <div><img src="Website%20build%20assets/planets%20svgs/Just%20planet/Planet-Neptune.svg" alt=""><span>Neptune</span></div>
+    </div>
+  </dialog>
+  <script src="app.js"></script>
+</body>
+</html>
