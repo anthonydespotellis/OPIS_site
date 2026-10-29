@@ -513,3 +513,4 @@ h2,h3,.brand,.quiz-card legend{font-weight:700;letter-spacing:-.015em}
 .quiz-card:not(.written-card){display:flex;flex-direction:column}
 .quiz-card[data-question="2"]{align-self:stretch}
 .quiz-card:not(.written-card) .quiz-feedback{margin-top:auto}
+.quiz-heading h2.section-heading-with-audio{margin-right:auto;margin-left:auto}
