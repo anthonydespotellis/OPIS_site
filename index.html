@@ -20,6 +20,12 @@
         <a href="#quiz">Quiz</a>
       </div>
     </nav>
+    <span class="shooting-star shooting-star-one" aria-hidden="true"></span>
+    <span class="shooting-star shooting-star-two" aria-hidden="true"></span>
+    <span class="shooting-star shooting-star-three" aria-hidden="true"></span>
+    <div class="hero-mercury-orbit" aria-hidden="true">
+      <span class="hero-mercury"><img src="Website%20build%20assets/planets%20svgs/Just%20planet/Planet-Mercury.svg" alt=""></span>
+    </div>
     <div class="hero-copy">
       <span class="hero-sparkle hero-sparkle-one" aria-hidden="true">✦</span>
       <span class="hero-sparkle hero-sparkle-two" aria-hidden="true">✧</span>
@@ -30,6 +36,8 @@
     </div>
     <div class="hero-planet hero-venus" aria-hidden="true"><img src="Website%20build%20assets/planets%20svgs/Just%20planet/Planet-Venus.svg" alt=""></div>
     <div class="hero-planet hero-earth" aria-hidden="true"><img src="Website%20build%20assets/planets%20svgs/Just%20planet/Planet-Earth.svg" alt=""></div>
+    <div class="hero-planet hero-mars" aria-hidden="true"><img src="Website%20build%20assets/planets%20svgs/Just%20planet/Planet-Mars.svg" alt=""></div>
+    <div class="hero-planet hero-jupiter" aria-hidden="true"><img src="Website%20build%20assets/planets%20svgs/Just%20planet/Planet-Jupiter.svg" alt=""></div>
   </header>
 
   <main>
@@ -43,6 +51,10 @@
         <p><strong>In order from the Sun, the eight planets are Mercury, Venus, Earth, Mars, Jupiter, Saturn, Uranus and Neptune.</strong></p>
       </div>
       <div class="solar-line" role="group" aria-label="Put the planets in order from the Sun">
+        <div class="planet-sort-celebration" aria-hidden="true"></div>
+        <button class="planet-sort-reset" type="button" aria-label="Reset planet order" title="Reset activity">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12a9 9 0 1 0 2.64-6.36L3 8.25M3 3v5.25h5.25"/></svg>
+        </button>
         <div class="sun-marker"><img src="Website%20build%20assets/planets%20svgs/Just%20planet/Sun.svg" alt="Sun"><span>Sun</span></div>
         <div class="planet-sort-board">
           <div class="planet-sort-tray" role="group" aria-label="Planets to drag into order">
@@ -116,6 +128,7 @@
           <div class="carousel-origin" aria-hidden="true">
             <img class="carousel-sun" src="Website%20build%20assets/planets%20svgs/Just%20planet/Sun.svg" alt="">
           </div>
+          <div class="orbit-temperature-band" id="orbit-temperature-band" aria-hidden="true" hidden></div>
           <div class="orbit-ring" data-orbit="0" aria-hidden="true"></div>
           <div class="orbit-ring" data-orbit="1" aria-hidden="true"></div>
           <div class="orbit-ring" data-orbit="2" aria-hidden="true"></div>
@@ -231,6 +244,7 @@
       <div><img src="Website%20build%20assets/planets%20svgs/Just%20planet/Planet-Neptune.svg" alt=""><span>Neptune</span></div>
     </div>
   </dialog>
+  <div class="explore-astronaut-cursor" aria-hidden="true"><img src="Website%20build%20assets/Astro%20character%20standing.svg" alt=""></div>
   <script src="app.js"></script>
 </body>
 </html>

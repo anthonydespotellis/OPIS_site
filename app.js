@@ -171,8 +171,40 @@ function temperatureColor(temperature) {
     solid: `rgb(${red}, ${green}, ${blue})`,
     line: `rgba(${red}, ${green}, ${blue}, .3)`,
     glow: `rgba(${red}, ${green}, ${blue}, .4)`,
-    strongGlow: `rgba(${red}, ${green}, ${blue}, .8)`
+    strongGlow: `rgba(${red}, ${green}, ${blue}, .8)`,
+    band: `rgba(${red}, ${green}, ${blue}, .14)`
   };
+}
+
+function updateOrbitTemperatureBand() {
+  if (!orbitTemperatureBand) return;
+  const selectedIndex = orbitPlanets.findIndex((button) => button.classList.contains("is-selected"));
+  const selectedRing = orbitRings[selectedIndex];
+  const outerRadius = Number.parseFloat(selectedRing?.style.width) / 2;
+  if (selectedIndex < 0 || !Number.isFinite(outerRadius) || outerRadius <= 0) {
+    orbitTemperatureBand.hidden = true;
+    return;
+  }
+
+  const sun = carouselStage.querySelector(".carousel-sun");
+  const sunRadius = sun.getBoundingClientRect().width / 2;
+  const firstOrbitRadius = Number.parseFloat(orbitRings[0].style.width) / 2;
+  const nextOrbitRadius = Number.parseFloat(orbitRings[1].style.width) / 2;
+  const orbitSpacing = nextOrbitRadius - firstOrbitRadius;
+  // One ring interval makes Earth's wash fade out by Venus.
+  const innerRadius = Math.max(sunRadius + 8, outerRadius - orbitSpacing);
+  const innerStop = Math.max(0, Math.min(99, (innerRadius / outerRadius) * 100));
+  const selectedName = orbitPlanets[selectedIndex].dataset.planet;
+  const color = temperatureColor(planets[selectedName].temperature);
+  const centerX = carouselStage.querySelector(".carousel-origin").offsetLeft;
+  const centerY = carouselStage.clientHeight / 2;
+
+  orbitTemperatureBand.style.width = `${outerRadius * 2}px`;
+  orbitTemperatureBand.style.height = `${outerRadius * 2}px`;
+  orbitTemperatureBand.style.left = `${centerX}px`;
+  orbitTemperatureBand.style.top = `${centerY}px`;
+  orbitTemperatureBand.style.background = `radial-gradient(circle closest-side, transparent 0%, transparent ${innerStop}%, ${color.band} 100%)`;
+  orbitTemperatureBand.hidden = false;
 }
 
 function selectPlanet(name, revealCard = true) {
@@ -212,6 +244,25 @@ function selectPlanet(name, revealCard = true) {
     const color = temperatureColor(planetData.temperature);
     button.classList.toggle("is-selected", selected);
     button.setAttribute("aria-pressed", String(selected));
+    button.classList.toggle("has-landed", selected && revealCard);
+    button.querySelector(".planet-landing-astronaut")?.remove();
+    if (selected && revealCard) {
+      const landedAstronaut = document.createElement("span");
+      landedAstronaut.className = "planet-landing-astronaut astronaut-tint-wrap";
+      const landedAstronautArt = document.createElement("img");
+      landedAstronautArt.className = "gravity-astronaut";
+      landedAstronautArt.src = gravityRatio > 1
+        ? "Website%20build%20assets/Astro%20character%20kneeling.svg"
+        : "Website%20build%20assets/Astro%20character%20standing.svg";
+      landedAstronautArt.alt = "";
+      landedAstronautArt.setAttribute("aria-hidden", "true");
+      landedAstronaut.append(landedAstronautArt);
+      landedAstronaut.setAttribute("aria-hidden", "true");
+      landedAstronaut.classList.toggle("is-hot", data.temperature > 15);
+      landedAstronaut.classList.toggle("is-cold", data.temperature < 15);
+      landedAstronaut.style.setProperty("--astronaut-mask", `url("${landedAstronautArt.getAttribute("src")}")`);
+      button.append(landedAstronaut);
+    }
     button.style.setProperty("--planet-temperature-glow", color.glow);
     button.style.setProperty("--planet-temperature-glow-strong", color.strongGlow);
     const orbit = orbitRings.find((ring) => Number(ring.dataset.orbit) === planetData.order - 1);
@@ -220,10 +271,13 @@ function selectPlanet(name, revealCard = true) {
     orbit.style.setProperty("--orbit-temperature-glow", color.glow);
   });
   orbitRings.forEach((ring) => ring.classList.toggle("is-selected", Number(ring.dataset.orbit) === data.order - 1));
+  updateOrbitTemperatureBand();
   if (revealCard) {
     planetCardOpen = true;
     planetInfo.hidden = false;
     explorer.classList.remove("is-card-hidden");
+    carouselStage.classList.remove("has-astronaut-cursor");
+    exploreAstronautCursor.classList.remove("is-visible");
     showDistanceGuide(name);
   } else {
     planetInfo.hidden = true;
@@ -237,6 +291,7 @@ const explorer = $(".explorer");
 const planetInfo = $(".planet-info");
 const orbitPlanets = [...document.querySelectorAll(".orbit-planet")];
 const orbitRings = [...document.querySelectorAll(".orbit-ring")];
+const orbitTemperatureBand = $("#orbit-temperature-band");
 const distanceGuide = $("#distance-guide");
 const distanceGuideLine = $("#distance-guide-line");
 const distanceCallout = $("#distance-callout");
@@ -256,9 +311,37 @@ let carouselIsVisible = false;
 let autoRotationFrame = 0;
 let previousAutoTime = 0;
 const reducedMotionPreference = window.matchMedia("(prefers-reduced-motion: reduce)");
+const heroMercuryOrbit = $(".hero-mercury-orbit");
+const heroMercury = $(".hero-mercury");
+const exploreAstronautCursor = $(".explore-astronaut-cursor");
+let heroMercuryIsVisible = false;
+let heroMercuryFrame = 0;
+const heroMercuryEpoch = performance.now();
 let astronautJumpTimer = 0;
 let astronautJumpAnimation = null;
 let selectedGravityRatio = 1;
+
+function renderHeroMercury(now) {
+  if (!heroMercuryIsVisible || reducedMotionPreference.matches) return;
+  const width = heroMercuryOrbit.clientWidth;
+  const height = heroMercuryOrbit.clientHeight;
+  const radiusX = (width - 1) / 2;
+  const radiusY = (height - 1) / 2;
+  const angle = ((now - heroMercuryEpoch) / 34000) * Math.PI * 2;
+  heroMercury.style.left = `${radiusX * (1 + Math.sin(angle))}px`;
+  heroMercury.style.top = `${radiusY * (1 - Math.cos(angle))}px`;
+  heroMercuryFrame = requestAnimationFrame(renderHeroMercury);
+}
+
+function startHeroMercuryOrbit() {
+  if (!heroMercuryIsVisible || reducedMotionPreference.matches || heroMercuryFrame) return;
+  heroMercuryFrame = requestAnimationFrame(renderHeroMercury);
+}
+
+function stopHeroMercuryOrbit() {
+  if (heroMercuryFrame) cancelAnimationFrame(heroMercuryFrame);
+  heroMercuryFrame = 0;
+}
 
 function stopStandingAstronautJumps() {
   window.clearTimeout(astronautJumpTimer);
@@ -331,18 +414,23 @@ reducedMotionPreference.addEventListener?.("change", (event) => {
   if (event.matches) {
     stopAutoRotation();
     stopStandingAstronautJumps();
+    stopHeroMercuryOrbit();
   } else {
     startAutoRotation();
     startStandingAstronautJumps(selectedGravityRatio, planetCardOpen);
+    startHeroMercuryOrbit();
   }
 });
 
 function clearPlanetSelection() {
   orbitPlanets.forEach((button) => {
     button.classList.remove("is-selected");
+    button.classList.remove("has-landed");
+    button.querySelector(".planet-landing-astronaut")?.remove();
     button.setAttribute("aria-pressed", "false");
   });
   orbitRings.forEach((ring) => ring.classList.remove("is-selected"));
+  orbitTemperatureBand.hidden = true;
 }
 
 function closeCardAndResume() {
@@ -380,15 +468,78 @@ function updateDistanceGuidePosition() {
   distanceGuideLine.setAttribute("y1", y1);
   distanceGuideLine.setAttribute("x2", x2);
   distanceGuideLine.setAttribute("y2", y2);
-  const calloutWidth = distanceCallout.getBoundingClientRect().width;
-  const preferredLeft = planetX + planetRadius + 14;
-  const rightEdgeLimit = stageWidth - calloutWidth - 18;
-  const leftOfPlanet = planetX - planetRadius - calloutWidth - 14;
-  const calloutLeft = preferredLeft <= rightEdgeLimit
-    ? preferredLeft
-    : Math.max(12, leftOfPlanet);
-  distanceCallout.style.left = `${calloutLeft}px`;
-  distanceCallout.style.top = `${planetY}px`;
+  const calloutRect = distanceCallout.getBoundingClientRect();
+  const calloutWidth = calloutRect.width;
+  const calloutHeight = calloutRect.height;
+  const stageRect = carouselStage.getBoundingClientRect();
+  const selectedRect = selectedButton.getBoundingClientRect();
+  const selectedCenterX = selectedRect.left - stageRect.left + selectedRect.width / 2;
+  const selectedCenterY = selectedRect.top - stageRect.top + selectedRect.height / 2;
+  const selectedRadiusX = selectedRect.width / 2;
+  const selectedRadiusY = selectedRect.height / 2;
+  const selectedLabel = selectedButton.querySelector(".orbit-planet-label");
+  const selectedLabelRect = selectedLabel.getBoundingClientRect();
+  const selectedLabelLeft = selectedLabelRect.left - stageRect.left;
+  const selectedLabelBottom = selectedLabelRect.bottom - stageRect.top;
+  const padding = 10;
+  const clamp = (value, max) => Math.max(padding, Math.min(max - calloutWidth - padding, value));
+  const clampTop = (value) => Math.max(padding, Math.min(stageHeight - calloutHeight - padding, value));
+  const candidateOffsets = [
+    [selectedLabelLeft, selectedLabelBottom + 8],
+    [selectedCenterX + selectedRadiusX + 14, selectedCenterY - calloutHeight / 2],
+    [selectedCenterX - selectedRadiusX - calloutWidth - 14, selectedCenterY - calloutHeight / 2],
+    [selectedCenterX - calloutWidth / 2, selectedCenterY - selectedRadiusY - calloutHeight - 14],
+    [selectedCenterX - calloutWidth / 2, selectedCenterY + selectedRadiusY + 14],
+    [selectedCenterX + selectedRadiusX + 14, selectedCenterY - selectedRadiusY - calloutHeight - 10],
+    [selectedCenterX + selectedRadiusX + 14, selectedCenterY + selectedRadiusY + 10],
+    [selectedCenterX - selectedRadiusX - calloutWidth - 14, selectedCenterY - selectedRadiusY - calloutHeight - 10],
+    [selectedCenterX - selectedRadiusX - calloutWidth - 14, selectedCenterY + selectedRadiusY + 10]
+  ];
+  const planetRects = orbitPlanets.map((button) => {
+    const rect = button.getBoundingClientRect();
+    return {
+      left: rect.left - stageRect.left - 8,
+      top: rect.top - stageRect.top - 8,
+      right: rect.right - stageRect.left + 8,
+      bottom: rect.bottom - stageRect.top + 8,
+      weight: 1
+    };
+  });
+  const visibleNameTags = orbitPlanets.flatMap((button) => {
+    if (!button.classList.contains("is-selected") && !button.matches(":hover, :focus-visible")) return [];
+    const label = button.querySelector(".orbit-planet-label");
+    if (!label) return [];
+    const rect = label.getBoundingClientRect();
+    return [{
+      left: rect.left - stageRect.left - 5,
+      top: rect.top - stageRect.top - 5,
+      right: rect.right - stageRect.left + 5,
+      bottom: rect.bottom - stageRect.top + 5,
+      weight: 8
+    }];
+  });
+  const sunRect = carouselStage.querySelector(".carousel-sun").getBoundingClientRect();
+  const sunObstacle = [{
+    left: sunRect.left - stageRect.left - 24,
+    top: sunRect.top - stageRect.top - 24,
+    right: sunRect.right - stageRect.left + 24,
+    bottom: sunRect.bottom - stageRect.top + 24,
+    weight: 8
+  }];
+  const obstacles = [...sunObstacle, ...planetRects, ...visibleNameTags];
+  const candidates = candidateOffsets.map(([left, top], index) => ({
+    left: clamp(left, stageWidth),
+    top: clampTop(top),
+    preference: index
+  }));
+  const scoreCandidate = (candidate) => obstacles.reduce((score, obstacle) => {
+    const overlapWidth = Math.max(0, Math.min(candidate.left + calloutWidth, obstacle.right) - Math.max(candidate.left, obstacle.left));
+    const overlapHeight = Math.max(0, Math.min(candidate.top + calloutHeight, obstacle.bottom) - Math.max(candidate.top, obstacle.top));
+    return score + overlapWidth * overlapHeight * obstacle.weight;
+  }, candidate.preference * 0.01);
+  const placement = candidates.reduce((best, candidate) => scoreCandidate(candidate) < scoreCandidate(best) ? candidate : best);
+  distanceCallout.style.left = `${placement.left}px`;
+  distanceCallout.style.top = `${placement.top}px`;
 }
 
 function showDistanceGuide(name) {
@@ -444,6 +595,7 @@ function renderCarousel() {
     ring.style.left = `${centerX}px`;
     ring.style.top = `${centerY}px`;
   });
+  updateOrbitTemperatureBand();
   updateDistanceGuidePosition();
 }
 
@@ -604,10 +756,14 @@ const planetStrip = $(".solar-line");
 const planetSortStatus = $(".planet-sort-status");
 const sortTokens = [...document.querySelectorAll(".sortable-planet")];
 const dropZones = [...document.querySelectorAll(".planet-dropzone")];
+const sortSources = new Map(sortTokens.map((token) => [token, token.parentElement]));
+const sortResetButton = $(".planet-sort-reset");
+const sortCelebration = $(".planet-sort-celebration");
 let selectedSortToken = null;
 let activePlanetDrag = null;
 let suppressSortClick = false;
 let placedPlanetCount = 0;
+let completionFadeTimer = 0;
 
 function setSortStatus(message) {
   planetSortStatus.textContent = message;
@@ -619,6 +775,58 @@ function getDropZoneAtPoint(x, y) {
     return x >= bounds.left && x <= bounds.right && y >= bounds.top && y <= bounds.bottom;
   }) || null;
 }
+
+function celebratePlanetOrder() {
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  sortCelebration.replaceChildren();
+  for (let index = 0; index < 14; index += 1) {
+    const star = document.createElement("span");
+    star.className = "sort-shooting-star";
+    const movingUp = index % 2 === 1;
+    const top = movingUp ? 72 + Math.random() * 18 : 4 + Math.random() * 18;
+    const angle = movingUp ? -(8 + Math.random() * 4) : 8 + Math.random() * 4;
+    star.style.setProperty("--star-top", `${top}%`);
+    star.style.setProperty("--star-angle", `${angle}deg`);
+    star.style.setProperty("--star-delay", `${Math.random() * 900}ms`);
+    star.style.setProperty("--star-duration", `${1500 + Math.random() * 900}ms`);
+    sortCelebration.append(star);
+    star.addEventListener("animationend", () => star.remove(), { once: true });
+  }
+}
+
+function resetPlanetOrder() {
+  window.clearTimeout(completionFadeTimer);
+  if (activePlanetDrag) {
+    activePlanetDrag.hoverZone?.classList.remove("is-drop-target");
+    activePlanetDrag.token.classList.remove("is-dragging");
+    activePlanetDrag.token.style.removeProperty("--drag-x");
+    activePlanetDrag.token.style.removeProperty("--drag-y");
+    activePlanetDrag = null;
+  }
+  sortTokens.forEach((token) => {
+    token.classList.remove("is-placed", "is-keyboard-selected", "is-dragging");
+    token.style.removeProperty("--drag-x");
+    token.style.removeProperty("--drag-y");
+    token.setAttribute("aria-label", `${token.dataset.planet}, drag to its place`);
+    sortSources.get(token).append(token);
+  });
+  document.querySelectorAll(".planet-target-cell").forEach((cell) => {
+    cell.classList.remove("is-filled", "is-wrong");
+    const zone = cell.querySelector(".planet-dropzone");
+    zone.setAttribute("aria-label", Number(cell.dataset.slot) === 1
+      ? "Position 1, closest to the Sun"
+      : Number(cell.dataset.slot) === 8
+        ? "Position 8, farthest from the Sun"
+        : `Position ${cell.dataset.slot} from the Sun`);
+  });
+  selectedSortToken = null;
+  placedPlanetCount = 0;
+  sortCelebration.replaceChildren();
+  planetSortStatus.classList.remove("is-fading");
+  setSortStatus("Drag each planet into its correct place from the Sun.");
+}
+
+sortResetButton.addEventListener("click", resetPlanetOrder);
 
 function placePlanetInOrder(token, zone) {
   if (!token || !zone) return false;
@@ -646,7 +854,8 @@ function placePlanetInOrder(token, zone) {
   selectedSortToken = null;
   if (placedPlanetCount === sortTokens.length) {
     setSortStatus("Great work! All eight planets are in order from the Sun.");
-    window.setTimeout(() => planetSortStatus.classList.add("is-fading"), 2000);
+    celebratePlanetOrder();
+    completionFadeTimer = window.setTimeout(() => planetSortStatus.classList.add("is-fading"), 2000);
   } else {
     setSortStatus(`${token.dataset.planet} is in the right place. ${placedPlanetCount} of 8 planets placed.`);
   }
@@ -914,6 +1123,33 @@ earthWeightSlider.addEventListener("input", () => {
 });
 new ResizeObserver(updateWeightDragHint).observe(weightSliderControl);
 updateWeightDragHint();
+if ("IntersectionObserver" in window) {
+  const heroMercuryObserver = new IntersectionObserver((entries) => {
+    heroMercuryIsVisible = entries.some((entry) => entry.isIntersecting);
+    if (heroMercuryIsVisible) startHeroMercuryOrbit();
+    else stopHeroMercuryOrbit();
+  }, { threshold: 0 });
+  heroMercuryObserver.observe(heroMercuryOrbit.closest(".hero"));
+} else {
+  heroMercuryIsVisible = true;
+  startHeroMercuryOrbit();
+}
+
+const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)");
+function moveExploreAstronautCursor(event) {
+  if (!finePointer.matches || event.pointerType === "touch") return;
+  carouselStage.classList.add("has-astronaut-cursor");
+  exploreAstronautCursor.style.left = `${event.clientX}px`;
+  exploreAstronautCursor.style.top = `${event.clientY}px`;
+  exploreAstronautCursor.classList.add("is-visible");
+}
+carouselStage.addEventListener("pointerenter", moveExploreAstronautCursor);
+carouselStage.addEventListener("pointermove", moveExploreAstronautCursor);
+carouselStage.addEventListener("pointerleave", () => {
+  carouselStage.classList.remove("has-astronaut-cursor");
+  exploreAstronautCursor.classList.remove("is-visible");
+});
+
 selectPlanet("Earth", false);
 clearPlanetSelection();
 startAutoRotation();
