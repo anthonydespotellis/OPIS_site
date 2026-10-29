@@ -1136,8 +1136,19 @@ if ("IntersectionObserver" in window) {
 }
 
 const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)");
+const exploreAstronautCursorArt = exploreAstronautCursor.querySelector("img");
+const floatingAstronautArt = "Website%20build%20assets/Astro%20character%20Floating.svg";
+const standingAstronautArt = "Website%20build%20assets/Astro%20character%20standing.svg";
+function updateExploreAstronautPose(event) {
+  const hoveredPlanet = event.target instanceof Element && event.target.closest(".orbit-planet");
+  const pose = hoveredPlanet ? "standing" : "floating";
+  if (exploreAstronautCursor.dataset.pose === pose) return;
+  exploreAstronautCursor.dataset.pose = pose;
+  exploreAstronautCursorArt.src = pose === "standing" ? standingAstronautArt : floatingAstronautArt;
+}
 function moveExploreAstronautCursor(event) {
   if (!finePointer.matches || event.pointerType === "touch") return;
+  updateExploreAstronautPose(event);
   carouselStage.classList.add("has-astronaut-cursor");
   exploreAstronautCursor.style.left = `${event.clientX}px`;
   exploreAstronautCursor.style.top = `${event.clientY}px`;
