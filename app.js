@@ -779,7 +779,7 @@ function getDropZoneAtPoint(x, y) {
 function celebratePlanetOrder() {
   if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
   sortCelebration.replaceChildren();
-  for (let index = 0; index < 14; index += 1) {
+  for (let index = 0; index < 7; index += 1) {
     const star = document.createElement("span");
     star.className = "sort-shooting-star";
     const movingUp = index % 2 === 1;
@@ -787,7 +787,7 @@ function celebratePlanetOrder() {
     const angle = movingUp ? -(8 + Math.random() * 4) : 8 + Math.random() * 4;
     star.style.setProperty("--star-top", `${top}%`);
     star.style.setProperty("--star-angle", `${angle}deg`);
-    star.style.setProperty("--star-delay", `${Math.random() * 900}ms`);
+    star.style.setProperty("--star-delay", `${index * 420 + Math.random() * 180}ms`);
     star.style.setProperty("--star-duration", `${1500 + Math.random() * 900}ms`);
     sortCelebration.append(star);
     star.addEventListener("animationend", () => star.remove(), { once: true });
