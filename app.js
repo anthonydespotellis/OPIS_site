@@ -583,6 +583,11 @@ function updateDistanceGuidePosition() {
 function showDistanceGuide(name) {
   const data = planets[name];
   if (!data) return;
+  const color = temperatureColor(data.temperature);
+  distanceCallout.style.setProperty("--distance-temperature-color", color.solid);
+  distanceCallout.style.setProperty("--distance-temperature-glow", color.glow);
+  distanceGuideLine.style.stroke = color.solid;
+  distanceGuideLine.style.filter = `drop-shadow(0 0 4px ${color.glow})`;
   $("#distance-callout-value").textContent = data.distance;
   distanceGuide.hidden = false;
   distanceCallout.hidden = false;
