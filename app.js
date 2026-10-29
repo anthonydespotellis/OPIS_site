@@ -899,6 +899,51 @@ function placePlanetInOrder(token, zone) {
   return true;
 }
 
+function clearActivePlanetDrag() {
+  if (!activePlanetDrag) return;
+  activePlanetDrag.hoverZone?.classList.remove("is-drop-target");
+  activePlanetDrag.token.classList.remove("is-dragging");
+  activePlanetDrag.token.style.removeProperty("--drag-x");
+  activePlanetDrag.token.style.removeProperty("--drag-y");
+  activePlanetDrag = null;
+}
+
+function moveActivePlanetDrag(event) {
+  const drag = activePlanetDrag;
+  if (!drag || drag.pointerId !== event.pointerId) return;
+  const dx = event.clientX - drag.startX;
+  const dy = event.clientY - drag.startY;
+  if (Math.abs(dx) + Math.abs(dy) > 6) drag.moved = true;
+  drag.token.style.setProperty("--drag-x", `${dx}px`);
+  drag.token.style.setProperty("--drag-y", `${dy}px`);
+  const nextZone = getDropZoneAtPoint(event.clientX, event.clientY);
+  drag.hoverZone?.classList.remove("is-drop-target");
+  drag.hoverZone = nextZone;
+  nextZone?.classList.add("is-drop-target");
+}
+
+function finishActivePlanetDrag(event) {
+  const drag = activePlanetDrag;
+  if (!drag || drag.pointerId !== event.pointerId) return;
+  const zone = getDropZoneAtPoint(event.clientX, event.clientY);
+  clearActivePlanetDrag();
+  if (!drag.moved) return;
+  suppressSortClick = true;
+  window.setTimeout(() => { suppressSortClick = false; }, 120);
+  if (zone) placePlanetInOrder(drag.token, zone);
+}
+
+function cancelActivePlanetDrag(event) {
+  if (activePlanetDrag && (event?.pointerId == null || activePlanetDrag.pointerId === event.pointerId)) {
+    clearActivePlanetDrag();
+  }
+}
+
+window.addEventListener("pointermove", moveActivePlanetDrag);
+window.addEventListener("pointerup", finishActivePlanetDrag);
+window.addEventListener("pointercancel", cancelActivePlanetDrag);
+window.addEventListener("blur", () => cancelActivePlanetDrag());
+
 sortTokens.forEach((token) => {
   token.addEventListener("click", () => {
     if (suppressSortClick) {
@@ -912,50 +957,11 @@ sortTokens.forEach((token) => {
   });
 
   token.addEventListener("pointerdown", (event) => {
-    if (token.classList.contains("is-placed") || event.button > 0) return;
+    if (activePlanetDrag || token.classList.contains("is-placed") || event.button > 0) return;
     selectedSortToken = null;
     sortTokens.forEach((item) => item.classList.remove("is-keyboard-selected"));
     activePlanetDrag = { token, pointerId: event.pointerId, startX: event.clientX, startY: event.clientY, moved: false, hoverZone: null };
     token.classList.add("is-dragging");
-    token.setPointerCapture(event.pointerId);
-  });
-
-  token.addEventListener("pointermove", (event) => {
-    if (!activePlanetDrag || activePlanetDrag.token !== token || activePlanetDrag.pointerId !== event.pointerId) return;
-    const dx = event.clientX - activePlanetDrag.startX;
-    const dy = event.clientY - activePlanetDrag.startY;
-    if (Math.abs(dx) + Math.abs(dy) > 6) activePlanetDrag.moved = true;
-    token.style.setProperty("--drag-x", `${dx}px`);
-    token.style.setProperty("--drag-y", `${dy}px`);
-    const nextZone = getDropZoneAtPoint(event.clientX, event.clientY);
-    activePlanetDrag.hoverZone?.classList.remove("is-drop-target");
-    activePlanetDrag.hoverZone = nextZone;
-    nextZone?.classList.add("is-drop-target");
-  });
-
-  token.addEventListener("pointerup", (event) => {
-    if (!activePlanetDrag || activePlanetDrag.token !== token || activePlanetDrag.pointerId !== event.pointerId) return;
-    const drag = activePlanetDrag;
-    const zone = getDropZoneAtPoint(event.clientX, event.clientY);
-    drag.hoverZone?.classList.remove("is-drop-target");
-    token.classList.remove("is-dragging");
-    token.style.removeProperty("--drag-x");
-    token.style.removeProperty("--drag-y");
-    activePlanetDrag = null;
-    if (drag.moved) {
-      suppressSortClick = true;
-      window.setTimeout(() => { suppressSortClick = false; }, 80);
-      if (zone) placePlanetInOrder(token, zone);
-    }
-  });
-
-  token.addEventListener("pointercancel", () => {
-    if (!activePlanetDrag || activePlanetDrag.token !== token) return;
-    activePlanetDrag.hoverZone?.classList.remove("is-drop-target");
-    token.classList.remove("is-dragging");
-    token.style.removeProperty("--drag-x");
-    token.style.removeProperty("--drag-y");
-    activePlanetDrag = null;
   });
 });
 
