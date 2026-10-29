@@ -67,9 +67,9 @@ function speakPassage(button, passage) {
 }
 
 function addReadAloudButtons() {
-  const passages = [...document.querySelectorAll("p:not(.quiz-feedback):not(#quiz-result):not(.carousel-hint):not(.planet-sort-status), h1, h2, h3, .quiz-card legend")]
+  const passages = [...document.querySelectorAll("p:not(.quiz-feedback):not(#quiz-result):not(.carousel-hint):not(.planet-sort-status), h1, h2, h3")]
     .filter((passage) => !passage.closest(".group-text, .planet-info")
-      && !passage.matches(".hero-copy h1, .hero-copy > p:not(.eyebrow), .intro-section .section-heading h2, .intro-section .intro-copy p, .explore-heading h2, .explore-heading > p"));
+      && !passage.matches(".hero-copy h1, .hero-copy > p:not(.eyebrow), .intro-section .section-heading h2, .intro-section .intro-copy p, .explore-heading h2, .explore-heading > p, .quiz-heading h2, .quiz-heading > p"));
   passages.forEach((passage) => {
     const control = document.createElement("span");
     control.className = "read-aloud-wrap";
@@ -88,6 +88,42 @@ function addReadAloudButtons() {
     while (passage.firstChild) copy.append(passage.firstChild);
     control.append(button, copy);
     passage.append(control);
+  });
+
+  document.querySelectorAll(".quiz-card[data-question] legend").forEach((legend) => {
+    const card = legend.closest(".quiz-card");
+    const questionNumber = legend.querySelector(".question-number");
+    const originalQuestionNodes = [...legend.childNodes].filter((node) => node !== questionNumber);
+    const question = originalQuestionNodes
+      .map((node) => node.textContent)
+      .join(" ")
+      .trim();
+    originalQuestionNodes.forEach((node) => node.remove());
+    const title = document.createElement("span");
+    title.className = "quiz-question-title";
+    title.textContent = question;
+    legend.append(title);
+
+    const choices = [...card.querySelectorAll("label:not(.sr-only)")]
+      .map((label) => label.textContent.trim())
+      .filter(Boolean);
+    const copy = document.createElement("span");
+    copy.className = "read-aloud-copy sr-only";
+    copy.textContent = [question, choices.length ? `Answer choices: ${choices.join(". ")}` : ""]
+      .filter(Boolean)
+      .join(". ");
+
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "read-aloud-button quiz-question-speaker";
+    const controlLabel = choices.length ? "Read the question and answer options aloud" : "Read the question aloud";
+    button.setAttribute("aria-label", controlLabel);
+    button.setAttribute("aria-pressed", "false");
+    button.title = controlLabel;
+    button.innerHTML = '<svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3.5 8v4h3l4 3V5l-4 3h-3Z"/><path d="M13 7.2a4 4 0 0 1 0 5.6M15 5a7 7 0 0 1 0 10"/></svg>';
+    button.disabled = !("speechSynthesis" in window);
+    button.addEventListener("click", () => speakPassage(button, legend));
+    legend.append(button, copy);
   });
 
   document.querySelectorAll(".group-text").forEach((card) => {
@@ -139,6 +175,11 @@ function addReadAloudButtons() {
     document.querySelector(".explore-heading h2"),
     [...document.querySelectorAll(".explore-heading > p")],
     "Explore the Solar System"
+  );
+  sectionReadAloud(
+    document.querySelector(".quiz-heading h2"),
+    [...document.querySelectorAll(".quiz-heading > p")],
+    "Test yourself"
   );
 
   const planetCardSpeaker = document.querySelector(".planet-title-speaker");
@@ -959,7 +1000,11 @@ document.querySelectorAll("[data-open-mnemonic]").forEach((button) => {
 });
 $("[data-close-dialog]").addEventListener("click", () => mnemonicDialog.close());
 mnemonicDialog.addEventListener("click", (event) => {
-  if (event.target === mnemonicDialog) mnemonicDialog.close();
+  if (event.target !== mnemonicDialog) return;
+  const bounds = mnemonicDialog.getBoundingClientRect();
+  const clickedOutside = event.clientX < bounds.left || event.clientX > bounds.right
+    || event.clientY < bounds.top || event.clientY > bounds.bottom;
+  if (clickedOutside) mnemonicDialog.close();
 });
 
 const sunQuestion = document.querySelector('[data-question="2"]');
@@ -1059,20 +1104,35 @@ sunQuestion.querySelectorAll('input[name="sun"]').forEach((input) => {
 });
 
 const quizForm = $("#quiz-form");
+function setQuestionCheckStatus(card, status) {
+  const badge = card.querySelector(".question-number");
+  if (!badge) return;
+  const number = badge.dataset.number || badge.textContent.trim();
+  badge.dataset.number = number;
+  badge.classList.remove("is-right", "is-wrong");
+  if (!status) {
+    badge.textContent = number;
+    badge.removeAttribute("aria-label");
+    return;
+  }
+  badge.classList.add(status === "right" ? "is-right" : "is-wrong");
+  badge.textContent = status === "right" ? "✓" : "×";
+  badge.setAttribute("aria-label", `Question ${number}: ${status === "right" ? "correct" : "incorrect"}`);
+}
+
 quizForm.addEventListener("submit", (event) => {
   event.preventDefault();
-  let correct = 0;
-  let answered = 0;
   document.querySelectorAll(".quiz-card[data-question]").forEach((card) => {
     const feedback = card.querySelector(".quiz-feedback");
     feedback.classList.remove("is-right", "is-wrong");
     if (card.dataset.question === "3") {
       const answer = $("#written-answer").value.trim();
       if (!answer) {
+        setQuestionCheckStatus(card, "wrong");
         feedback.textContent = "Add your own description, then check again.";
         feedback.classList.add("is-wrong");
       } else {
-        answered += 1;
+        setQuestionCheckStatus(card, "right");
         feedback.textContent = "Nice work putting it into your own words! The Solar System is the Sun and everything that travels around it.";
         feedback.classList.add("is-right");
       }
@@ -1080,13 +1140,13 @@ quizForm.addEventListener("submit", (event) => {
     }
     const selected = card.querySelector("input:checked");
     if (!selected) {
+      setQuestionCheckStatus(card, "wrong");
       feedback.textContent = "Choose an answer to check this one.";
       feedback.classList.add("is-wrong");
       return;
     }
-    answered += 1;
     const isCorrect = selected.value === "right";
-    if (isCorrect) correct += 1;
+    setQuestionCheckStatus(card, isCorrect ? "right" : "wrong");
     feedback.textContent = isCorrect
       ? "That's right!"
       : card.dataset.question === "1"
@@ -1094,10 +1154,6 @@ quizForm.addEventListener("submit", (event) => {
         : "Not quite. The Sun is a star, not a planet.";
     feedback.classList.add(isCorrect ? "is-right" : "is-wrong");
   });
-  const result = $("#quiz-result");
-  result.textContent = answered === 3
-    ? `You got ${correct} of 2 scored questions right — and shared your own explanation. ${correct === 2 ? "Fantastic exploring!" : "Keep exploring and give it another go!"}`
-    : "Answer all three questions to finish your check-in.";
 });
 
 addReadAloudButtons();
