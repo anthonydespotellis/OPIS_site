@@ -217,19 +217,6 @@ function selectPlanet(name, revealCard = true) {
   const gravityRatio = Number.parseFloat(data.gravity);
   currentGravityRatio = gravityRatio;
   updatePlanetWeightReadouts();
-  const astronaut = $(".gravity-astronaut");
-  const astronautWrap = astronaut.closest(".astronaut-tint-wrap");
-  astronautWrap.classList.toggle("is-hot", data.temperature > 15);
-  astronautWrap.classList.toggle("is-cold", data.temperature < 15);
-  if (gravityRatio <= 1) {
-    astronaut.src = "Website%20build%20assets/Astro%20character%20standing.svg";
-    astronaut.alt = gravityRatio === 1 ? "Astronaut standing at Earth gravity" : "Astronaut standing in lower gravity";
-  } else {
-    astronaut.src = "Website%20build%20assets/Astro%20character%20kneeling.svg";
-    astronaut.alt = "Astronaut kneeling in stronger gravity";
-  }
-  astronautWrap.style.setProperty("--astronaut-mask", `url("${astronaut.getAttribute("src")}")`);
-  startStandingAstronautJumps(gravityRatio, revealCard);
   $("#year-value").textContent = data.year;
   $("#temperature-label").textContent = `${data.temperature < 0 ? "−" : ""}${Math.abs(data.temperature)}°C`;
   $("#moons-value").textContent = data.moons;
@@ -270,6 +257,7 @@ function selectPlanet(name, revealCard = true) {
     orbit.style.setProperty("--orbit-temperature-line", color.line);
     orbit.style.setProperty("--orbit-temperature-glow", color.glow);
   });
+  startStandingAstronautJumps(gravityRatio, revealCard);
   orbitRings.forEach((ring) => ring.classList.toggle("is-selected", Number(ring.dataset.orbit) === data.order - 1));
   updateOrbitTemperatureBand();
   if (revealCard) {
@@ -355,12 +343,14 @@ function startStandingAstronautJumps(gravityRatio, enabled) {
   selectedGravityRatio = gravityRatio;
   if (!enabled || gravityRatio > 1 || reducedMotionPreference.matches) return;
 
-  const astronaut = $(".astronaut-tint-wrap");
-  if (!astronaut) return;
-
   const scheduleJump = (delay) => {
     astronautJumpTimer = window.setTimeout(() => {
       if (!planetCardOpen || selectedGravityRatio > 1 || reducedMotionPreference.matches) return;
+      const astronaut = $(".orbit-planet.is-selected .planet-landing-astronaut .gravity-astronaut");
+      if (!astronaut) {
+        scheduleJump(250);
+        return;
+      }
       const airtime = Math.max(360, Math.min(2100, 800 / selectedGravityRatio));
       const jumpHeight = Math.max(8, Math.min(28, 12 / selectedGravityRatio));
       astronautJumpAnimation = astronaut.animate([

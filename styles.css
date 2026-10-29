@@ -271,10 +271,10 @@ main{width:100%;padding:0 24px}
 .mnemonic-banner strong{font-size:21px}
 @media(max-width:620px){.mnemonic-banner>img{width:66px;height:62px}}
 @media(max-width:620px){.mnemonic-banner strong{font-size:16px}}
-.gravity-pose{display:grid;grid-template-columns:minmax(98px,.7fr) minmax(0,1.6fr);align-items:center;gap:18px;min-height:112px;margin:-2px 0 14px;color:#e6def5}
+.gravity-pose{display:grid;grid-template-columns:minmax(112px,.8fr) minmax(0,1.6fr);align-items:center;gap:18px;min-height:112px;margin:-2px 0 14px;color:#e6def5}
 .planet-weight-result{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;min-width:0;text-align:center}
-.planet-weight-result small{font-size:9px;color:#b9afcc;white-space:nowrap}
-.planet-weight-result output{font-size:14px;font-weight:800;line-height:1.2;color:#fff;white-space:nowrap}
+.planet-weight-result small{font-size:10px;color:#b9afcc;white-space:nowrap}
+.planet-weight-result output{font-size:28px;font-weight:800;line-height:1.05;color:#fff;white-space:nowrap}
 .gravity-details{display:flex;flex-direction:column;gap:8px;min-width:0}
 .gravity-stat{display:flex;flex-direction:column;gap:2px}
 .gravity-stat small{font-size:10px;color:#b9afcc}
@@ -296,7 +296,7 @@ main{width:100%;padding:0 24px}
 .temperature-meter{width:calc(100% - 52px)}
 .planet-title-row h3{margin-left:26px}
 .planet-fact{margin-right:0}
-@media(max-width:620px){.gravity-pose{grid-template-columns:84px minmax(0,1fr);gap:9px;min-height:100px}.planet-weight-result small{font-size:8px}.planet-weight-result output{font-size:12px}.planet-info{height:480px;min-height:480px}.planet-info-placeholder{height:480px;min-height:480px}}
+@media(max-width:620px){.gravity-pose{grid-template-columns:100px minmax(0,1fr);gap:9px;min-height:100px}.planet-weight-result small{font-size:8px}.planet-weight-result output{font-size:24px}.planet-info{height:480px;min-height:480px}.planet-info-placeholder{height:480px;min-height:480px}}
 .planet-info-placeholder{position:relative;height:480px;min-height:480px}
 .explorer.is-card-hidden .planet-info-placeholder{display:grid;place-items:center}
 .planet-info-placeholder .carousel-hint{position:static;left:auto;bottom:auto;margin:0;color:#c5b4fa;font-family:inherit;font-size:16px;font-weight:400;letter-spacing:normal;line-height:1.45;text-align:center;pointer-events:none;opacity:.78}
