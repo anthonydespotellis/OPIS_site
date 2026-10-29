@@ -404,11 +404,11 @@ main{width:100%;padding:0 24px}
 .group-close svg{width:13px;height:13px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round}
 .group-close:hover,.group-close:focus-visible{background:#fff}
 .group-unit.is-open .group-art{animation:none}
-@keyframes group-vector-pulse{0%,100%{transform:scale(1.18)}50%{transform:scale(1.22)}}
+@keyframes group-vector-pulse{0%,100%{transform:scale(1.18)}50%{transform:scale(1.20)}}
 @media(max-width:900px){.group-unit{min-height:220px}}
 @media(max-width:620px){.group-unit{min-height:210px}.group-art{transform:scale(1.08);animation-name:group-vector-pulse-small}.group-click-cue{font-size:10px}.group-card .group-text{width:min(225px,100%);min-height:128px;padding:15px 17px}.group-card .group-text h3{font-size:22px}.group-card .group-text p{font-size:14px}}
 h2,h3,.brand,.quiz-card legend{font-weight:700;letter-spacing:-.015em}
-@keyframes group-vector-pulse-small{0%,100%{transform:scale(1.08)}50%{transform:scale(1.12)}}
+@keyframes group-vector-pulse-small{0%,100%{transform:scale(1.08)}50%{transform:scale(1.10)}}
 @media(prefers-reduced-motion:reduce){.group-art{animation:none!important}.group-click-cue{transition:none}}
 .solar-line .mini-planet::after{display:none}
 .solar-line .mini-planet.label-below span{top:calc(50% + 42px)}
@@ -498,3 +498,4 @@ h2,h3,.brand,.quiz-card legend{font-weight:700;letter-spacing:-.015em}
 @media(max-width:620px){.planet-title-row{min-height:112px}.planet-title-row .planet-category{left:-49px}.planet-title-row .planet-category img{width:58px;height:56px;transform:translateY(-4px)}.planet-title-row .planet-category .planet-type{max-width:58px}.planet-title-row .planet-title-copy h3{font-size:28px}}
 .temperature-meter{margin-bottom:12px}
 .earth-weight-control>span,.weight-slider-control{width:calc(100% - 26px)}
+.planet-title-row .planet-title-copy h3 .planet-title-speaker{position:relative;top:10px}
