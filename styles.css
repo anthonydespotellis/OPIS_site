@@ -77,7 +77,7 @@ main{width:100%;padding:0 24px}
 .group-planets{position:relative;bottom:auto;display:flex;gap:6px;justify-content:center;align-items:center;width:100%;min-height:50px;margin-top:52px}
 .group-planets img{width:38px;height:38px;object-fit:contain;filter:drop-shadow(0 4px 7px #1c12302b)}
 .group-planets img:nth-child(1):nth-last-child(2){width:49px;height:49px}
-.mnemonic-banner{margin:94px auto 0;width:fit-content;max-width:100%;min-height:92px;padding:12px 22px;display:flex;align-items:center;gap:15px;background:#fff;border:1px solid #e8e1f2;border-radius:19px;box-shadow:0 10px 24px #31195718;color:var(--ink);text-align:left;transition:transform .2s,box-shadow .2s,border-color .2s}
+.mnemonic-banner{margin:138px auto 28px;width:fit-content;max-width:100%;min-height:92px;padding:12px 22px;display:flex;align-items:center;gap:15px;background:#fff;border:1px solid #e8e1f2;border-radius:19px;box-shadow:0 10px 24px #31195718;color:var(--ink);text-align:left;transition:transform .2s,box-shadow .2s,border-color .2s}
 .mnemonic-banner:hover,.mnemonic-banner:focus-visible{transform:translateY(-3px);box-shadow:0 15px 28px #31195724;border-color:#bca3ed}
 .mnemonic-banner>img{width:82px;height:66px;object-fit:contain}.mnemonic-banner>span:nth-child(2){display:flex;flex-direction:column;gap:5px}.mnemonic-banner strong{font-family:Gabarito,sans-serif;font-size:21px;color:#35156f}.mnemonic-banner small{font-size:13px;color:var(--muted)}.banner-arrow{margin-left:5px;color:#7851bf;font-size:24px}
 .explore-section{width:calc(100% + 48px);margin:56px -24px 0;padding:78px max(7vw,32px) 70px;position:relative;overflow:hidden}
