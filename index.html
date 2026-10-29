@@ -48,7 +48,7 @@
       <div class="intro-copy">
         <p>When we look up at the night sky, we see thousands of stars. A star is a giant, hot ball of gas that makes its own light and heat. The Sun is a star, and it is the only star in our Solar System.</p>
         <p>The Sun, and everything that travels around it, is called the Solar System. That includes Earth and seven other planets, along with moons, asteroids and other objects. The Sun sits at the centre, and its pull keeps the planets travelling around it.</p>
-        <p><strong>In order from the Sun, the eight planets are Mercury, Venus, Earth, Mars, Jupiter, Saturn, Uranus and Neptune.</strong></p>
+        <p>In order from the Sun, the eight planets are <strong>Mercury</strong>, <strong>Venus</strong>, <strong>Earth</strong>, <strong>Mars</strong>, <strong>Jupiter</strong>, <strong>Saturn</strong>, <strong>Uranus</strong> and <strong>Neptune</strong>.</p>
       </div>
       <div class="solar-line" role="group" aria-label="Put the planets in order from the Sun">
         <div class="planet-sort-celebration" aria-hidden="true"></div>
@@ -148,37 +148,44 @@
           <button class="orbit-planet" type="button" data-planet="Uranus" data-orbit="6" aria-pressed="false" aria-label="Select Uranus, planet 7 of 8" style="--planet-size:36px"><img src="Website%20build%20assets/planets%20svgs/Just%20planet/Planet-Uranus.svg" alt=""><span class="orbit-planet-label">Uranus</span></button>
           <button class="orbit-planet" type="button" data-planet="Neptune" data-orbit="7" aria-pressed="false" aria-label="Select Neptune, planet 8 of 8" style="--planet-size:34px"><img src="Website%20build%20assets/planets%20svgs/Just%20planet/Planet-Neptune.svg" alt=""><span class="orbit-planet-label">Neptune</span></button>
         </div>
-        <div class="planet-info-placeholder"><p class="carousel-hint">Hover to pause &#183; Drag to rotate &#183; Click to explore</p></div>
-        <article class="planet-info" aria-live="polite" aria-atomic="true" hidden>
-          <div class="planet-title-row">
-            <div class="planet-category"><img id="type-art" src="Website%20build%20assets/Themed%20boxes/theme%20-%20Rock.svg" alt=""><span class="planet-type" id="planet-type">ROCKY PLANET</span></div>
-            <div class="planet-title-copy">
-              <h3 id="planet-name"><span class="planet-name-label">Earth</span><button class="read-aloud-button planet-title-speaker" type="button" aria-label="Read the Earth planet card aloud" aria-pressed="false" title="Read the planet card aloud"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3.5 8v4h3l4 3V5l-4 3h-3Z"/><path d="M13 7.2a4 4 0 0 1 0 5.6M15 5a7 7 0 0 1 0 10"/></svg></button></h3>
-              <div class="gravity-stat"><small>Gravity</small><strong id="gravity-value">1.00&#215; Earth</strong></div>
+        <div class="planet-info-panel">
+          <div class="planet-info-placeholder">
+            <div class="placeholder-content">
+              <p class="carousel-hint">Hover to pause &#183; Drag to rotate &#183; Click to explore</p>
             </div>
           </div>
-          <div class="gravity-pose">
-            <div class="planet-weight-result">
-              <small id="planet-weight-label">Your Earth weight</small>
-              <output id="planet-weight-value" aria-live="polite">60 kg</output>
+          <article class="planet-info" aria-live="polite" aria-atomic="true" hidden>
+            <div class="planet-title-row">
+              <div class="planet-category"><img id="type-art" src="Website%20build%20assets/Themed%20boxes/theme%20-%20Rock.svg" alt=""><span class="planet-type" id="planet-type">ROCKY PLANET</span></div>
+              <div class="planet-title-copy">
+                <h3 id="planet-name"><span class="planet-name-label">Earth</span><button class="read-aloud-button planet-title-speaker" type="button" aria-label="Read the Earth planet card aloud" aria-pressed="false" title="Read the planet card aloud"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3.5 8v4h3l4 3V5l-4 3h-3Z"/><path d="M13 7.2a4 4 0 0 1 0 5.6M15 5a7 7 0 0 1 0 10"/></svg></button></h3>
+                <div class="gravity-stat"><small>Gravity</small><strong id="gravity-value">1.00&#215; Earth</strong></div>
+              </div>
             </div>
-            <div class="gravity-details">
-              <label class="earth-weight-control" for="earth-weight-slider">
-                <span><span>Your Earth weight</span><output id="earth-weight-value">60 kg</output></span>
-                <div class="weight-slider-control">
-                  <input id="earth-weight-slider" type="range" min="30" max="150" step="1" value="60" aria-label="Set your Earth weight in kilograms">
-                  <small class="weight-slider-hint">Drag</small>
-                </div>
-              </label>
+            <div class="gravity-pose">
+              <div class="planet-weight-result">
+                <small id="planet-weight-label">Your Earth weight</small>
+                <output id="planet-weight-value" aria-live="polite">60 kg</output>
+              </div>
+              <div class="gravity-details">
+                <label class="earth-weight-control" for="earth-weight-slider">
+                  <span><span>Your Earth weight</span><output id="earth-weight-value">60 kg</output></span>
+                  <div class="weight-slider-control">
+                    <input id="earth-weight-slider" type="range" min="30" max="150" step="1" value="60" aria-label="Set your Earth weight in kilograms">
+                    <small class="weight-slider-hint">Drag</small>
+                  </div>
+                </label>
+              </div>
             </div>
-          </div>
-          <dl class="planet-stats">
-            <div><dt>Length of year</dt><dd id="year-value">365 Earth days</dd></div>
-            <div><dt>Moons</dt><dd id="moons-value">1</dd></div>
-          </dl>
-          <p class="planet-fact" id="planet-fact">The only planet we know of with liquid water on its surface, and with life.</p>
-          <div class="temperature-meter"><div class="meter-label"><span>Temperature</span><strong id="temperature-label">15&#176;C</strong></div><div class="meter-track"><span id="temperature-marker"></span></div><div class="meter-scale"><span>Hotter</span><span>Colder</span></div></div>
-        </article>
+            <dl class="planet-stats">
+              <div><dt>Length of year</dt><dd id="year-value">365 Earth days</dd></div>
+              <div><dt>Moons</dt><dd id="moons-value">1</dd></div>
+            </dl>
+            <p class="planet-fact" id="planet-fact">The only planet we know of with liquid water on its surface, and with life.</p>
+            <div class="temperature-meter"><div class="meter-label"><span>Temperature</span><strong id="temperature-label">15&#176;C</strong></div><div class="meter-track"><span id="temperature-marker"></span></div><div class="meter-scale"><span>Hotter</span><span>Colder</span></div></div>
+          </article>
+          <div class="planet-visit-history" id="planet-visit-history" aria-live="polite" hidden><strong>You visited:</strong><div class="planet-visit-list" id="visited-planet-names" role="list" aria-label="Planets visited in order"></div></div>
+        </div>
       </div>
       <p class="scale-note">Planet sizes and orbital distances are stylised and not to scale.</p>
     </section>

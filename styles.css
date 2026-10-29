@@ -302,6 +302,9 @@ main{width:100%;padding:0 24px}
 .planet-info-placeholder{position:relative;height:480px;min-height:480px}
 .explorer.is-card-hidden .planet-info-placeholder{display:grid;place-items:center}
 .planet-info-placeholder .carousel-hint{position:static;left:auto;bottom:auto;margin:0;color:#c5b4fa;font-family:inherit;font-size:16px;font-weight:400;letter-spacing:normal;line-height:1.45;text-align:center;pointer-events:none;opacity:.78}
+.planet-info-placeholder .placeholder-content{display:flex;flex-direction:column;align-items:center;gap:10px;width:100%;padding:20px}
+.planet-info-placeholder .planet-visit-history{max-width:100%;margin:0;color:#c5b4fa;font-size:13px;line-height:1.5;text-align:center;overflow-wrap:anywhere}
+.planet-info-placeholder .planet-visit-history strong{color:#fff}
 @media(max-width:620px){.planet-info-placeholder .carousel-hint{font-size:14px}}
 .explore-section{padding-top:36px}
 .explorer{background:transparent;box-shadow:none;border:0}
@@ -420,7 +423,7 @@ h2,h3,.brand,.quiz-card legend{font-weight:700;letter-spacing:-.015em}
 .planet-sort-celebration{position:absolute;z-index:1;inset:0;overflow:hidden;pointer-events:none}
 .sort-shooting-star{position:absolute;top:var(--star-top);left:-12vw;width:clamp(100px,10vw,170px);height:2px;border-radius:99px;background:linear-gradient(90deg,transparent,#cbb3ff72 45%,#f2eaff 100%);filter:drop-shadow(0 0 6px #d0b9ff);opacity:0;transform-origin:left center;animation:sort-star-sweep var(--star-duration) ease-in-out var(--star-delay) both}
 .sort-shooting-star::after{content:"";position:absolute;top:50%;right:0;width:5px;height:5px;border-radius:50%;background:#fff;box-shadow:0 0 9px 3px #fff1ff;transform:translate(50%,-50%)}
-.planet-sort-reset{position:absolute;z-index:6;top:14px;right:clamp(14px,2vw,28px);display:grid;place-items:center;width:34px;height:34px;padding:0;border:1px solid #cdbbff55;border-radius:50%;background:#1b1039c9;color:#e5d9ff;cursor:pointer;transition:background .18s ease,border-color .18s ease,transform .18s ease}
+.planet-sort-reset{position:absolute;z-index:6;top:auto;right:clamp(14px,2vw,28px);bottom:14px;display:grid;place-items:center;width:34px;height:34px;padding:0;border:1px solid #cdbbff55;border-radius:50%;background:#1b1039c9;color:#e5d9ff;cursor:pointer;transition:background .18s ease,border-color .18s ease,transform .18s ease}
 .planet-sort-reset:hover,.planet-sort-reset:focus-visible{border-color:#d8c9ff;background:#6d4abf88;transform:rotate(-25deg);outline:2px solid #d8c9ff;outline-offset:2px}
 .planet-sort-reset svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 @keyframes sort-star-sweep{0%{opacity:0;transform:rotate(var(--star-angle)) translateX(0) scaleX(.65)}15%{opacity:.68}72%{opacity:.68}100%{opacity:0;transform:rotate(var(--star-angle)) translateX(120vw) scaleX(1.1)}}
@@ -514,3 +517,14 @@ h2,h3,.brand,.quiz-card legend{font-weight:700;letter-spacing:-.015em}
 .quiz-card[data-question="2"]{align-self:stretch}
 .quiz-card:not(.written-card) .quiz-feedback{margin-top:auto}
 .quiz-heading h2.section-heading-with-audio{margin-right:auto;margin-left:auto}
+.planet-info-panel{grid-column:2;display:flex;flex-direction:column;align-items:stretch;gap:12px;width:100%;max-width:500px;justify-self:end;align-self:center;transform:translateX(-38px);z-index:1}
+.planet-info-panel .planet-info-placeholder{display:none;position:relative;width:100%;max-width:none;height:480px;min-height:480px;margin:0;transform:none;justify-self:stretch;align-self:auto}
+.explorer.is-card-hidden .planet-info-panel .planet-info-placeholder{display:grid;place-items:center}
+.planet-info-panel .planet-info{width:100%;max-width:none;margin:0;transform:none;justify-self:stretch;align-self:auto}
+.planet-visit-history{display:flex;align-items:center;justify-content:center;gap:10px;margin:0;color:#c5b4fa;font-size:13px;line-height:1.4;text-align:center}
+.planet-visit-history[hidden]{display:none}
+.planet-visit-history strong{color:#fff}
+.planet-visit-list{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:7px}
+.planet-visit-list img{display:block;width:24px;height:24px;object-fit:contain;filter:drop-shadow(0 2px 4px #05031280)}
+@media(max-width:1100px){.planet-info-panel{grid-column:1;width:min(520px,calc(100% - 40px));justify-self:center;transform:none}}
+@media(max-width:620px){.planet-info-panel{width:calc(100% - 28px)}.planet-info-panel .planet-info-placeholder{height:480px;min-height:480px}.planet-visit-history{flex-wrap:wrap;font-size:12px}.planet-visit-list img{width:22px;height:22px}}

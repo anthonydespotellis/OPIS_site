@@ -67,7 +67,7 @@ function speakPassage(button, passage) {
 }
 
 function addReadAloudButtons() {
-  const passages = [...document.querySelectorAll("p:not(.quiz-feedback):not(#quiz-result):not(.carousel-hint):not(.planet-sort-status), h1, h2, h3")]
+  const passages = [...document.querySelectorAll("p:not(.quiz-feedback):not(#quiz-result):not(.carousel-hint):not(.planet-sort-status):not(.planet-visit-history), h1, h2, h3")]
     .filter((passage) => !passage.closest(".group-text, .planet-info")
       && !passage.matches(".hero-copy h1, .hero-copy > p:not(.eyebrow), .intro-section .section-heading h2, .intro-section .intro-copy p, .explore-heading h2, .explore-heading > p, .quiz-heading h2, .quiz-heading > p"));
   passages.forEach((passage) => {
@@ -325,11 +325,13 @@ const explorer = $(".explorer");
 const planetInfo = $(".planet-info");
 const orbitPlanets = [...document.querySelectorAll(".orbit-planet")];
 const orbitRings = [...document.querySelectorAll(".orbit-ring")];
+const visitedPlanetNames = [];
+const planetVisitHistory = $("#planet-visit-history");
 const orbitTemperatureBand = $("#orbit-temperature-band");
 const distanceGuide = $("#distance-guide");
 const distanceGuideLine = $("#distance-guide-line");
 const distanceCallout = $("#distance-callout");
-const orbitPhases = [-35, 4, -12, 72, 145, 210, 265, 290];
+const orbitPhases = [-35, 4, -12, 72, 145, 210, 310, 325];
 const orbitPeriods = [88, 225, 365, 687, 4331, 10747, 30589, 59800];
 // Preserve the real speed order while compressing the range so every orbit remains visible.
 const orbitSpeeds = orbitPeriods.map((period) => .65 * Math.pow(59800 / period, .35));
@@ -678,7 +680,22 @@ orbitPlanets.forEach((button) => {
       suppressPlanetClick = false;
       return;
     }
-    focusPlanet(button.dataset.planet);
+    const planetName = button.dataset.planet;
+    if (!visitedPlanetNames.includes(planetName)) {
+      visitedPlanetNames.push(planetName);
+      const visitList = $("#visited-planet-names");
+      visitList.replaceChildren();
+      Object.keys(planets).filter((name) => visitedPlanetNames.includes(name)).forEach((name) => {
+        const planetIcon = document.createElement("img");
+        planetIcon.src = `Website%20build%20assets/planets%20svgs/Just%20planet/Planet-${name}.svg`;
+        planetIcon.alt = name;
+        planetIcon.title = name;
+        planetIcon.setAttribute("role", "listitem");
+        visitList.append(planetIcon);
+      });
+      planetVisitHistory.hidden = false;
+    }
+    focusPlanet(planetName);
   });
   button.addEventListener("pointerenter", (event) => {
     if (event.pointerType === "touch") return;
