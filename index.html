@@ -151,16 +151,18 @@
         <div class="planet-info-placeholder"><p class="carousel-hint">Hover to pause &#183; Drag to rotate &#183; Click to explore</p></div>
         <article class="planet-info" aria-live="polite" aria-atomic="true" hidden>
           <div class="planet-title-row">
-            <h3 id="planet-name"><button class="read-aloud-button planet-title-speaker" type="button" aria-label="Read the Earth planet card aloud" aria-pressed="false" title="Read the planet card aloud"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3.5 8v4h3l4 3V5l-4 3h-3Z"/><path d="M13 7.2a4 4 0 0 1 0 5.6M15 5a7 7 0 0 1 0 10"/></svg></button><span class="planet-name-label">Earth</span></h3>
             <div class="planet-category"><img id="type-art" src="Website%20build%20assets/Themed%20boxes/theme%20-%20Rock.svg" alt=""><span class="planet-type" id="planet-type">ROCKY PLANET</span></div>
+            <div class="planet-title-copy">
+              <h3 id="planet-name"><span class="planet-name-label">Earth</span><button class="read-aloud-button planet-title-speaker" type="button" aria-label="Read the Earth planet card aloud" aria-pressed="false" title="Read the planet card aloud"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3.5 8v4h3l4 3V5l-4 3h-3Z"/><path d="M13 7.2a4 4 0 0 1 0 5.6M15 5a7 7 0 0 1 0 10"/></svg></button></h3>
+              <div class="gravity-stat"><small>Gravity</small><strong id="gravity-value">1.00&#215; Earth</strong></div>
+            </div>
           </div>
           <div class="gravity-pose">
             <div class="planet-weight-result">
-              <small>Your weight here</small>
+              <small id="planet-weight-label">Your Earth weight</small>
               <output id="planet-weight-value" aria-live="polite">60 kg</output>
             </div>
             <div class="gravity-details">
-              <div class="gravity-stat"><small>Gravity</small><strong id="gravity-value">1.00&#215; Earth</strong></div>
               <label class="earth-weight-control" for="earth-weight-slider">
                 <span><span>Your Earth weight</span><output id="earth-weight-value">60 kg</output></span>
                 <div class="weight-slider-control">

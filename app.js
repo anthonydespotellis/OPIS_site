@@ -214,8 +214,13 @@ function selectPlanet(name, revealCard = true) {
   $(".planet-title-speaker").setAttribute("aria-label", `Read the ${name} planet card aloud`);
   $("#planet-type").textContent = data.type.toUpperCase();
   $("#gravity-value").textContent = data.gravity;
+  $("#planet-weight-label").textContent = `Your ${name} weight`;
   const gravityRatio = Number.parseFloat(data.gravity);
   currentGravityRatio = gravityRatio;
+  const cardTemperatureColor = temperatureColor(data.temperature);
+  planetInfo.style.setProperty("--planet-temperature-color", cardTemperatureColor.solid);
+  planetInfo.style.setProperty("--planet-temperature-band", cardTemperatureColor.band);
+  planetInfo.style.setProperty("--planet-temperature-glow", cardTemperatureColor.glow);
   updatePlanetWeightReadouts();
   $("#year-value").textContent = data.year;
   $("#temperature-label").textContent = `${data.temperature < 0 ? "−" : ""}${Math.abs(data.temperature)}°C`;
@@ -346,7 +351,7 @@ function startStandingAstronautJumps(gravityRatio, enabled) {
   const scheduleJump = (delay) => {
     astronautJumpTimer = window.setTimeout(() => {
       if (!planetCardOpen || selectedGravityRatio > 1 || reducedMotionPreference.matches) return;
-      const astronaut = $(".orbit-planet.is-selected .planet-landing-astronaut .gravity-astronaut");
+      const astronaut = $(".orbit-planet.is-selected .planet-landing-astronaut");
       if (!astronaut) {
         scheduleJump(250);
         return;
@@ -354,9 +359,9 @@ function startStandingAstronautJumps(gravityRatio, enabled) {
       const airtime = Math.max(360, Math.min(2100, 800 / selectedGravityRatio));
       const jumpHeight = Math.max(8, Math.min(28, 12 / selectedGravityRatio));
       astronautJumpAnimation = astronaut.animate([
-        { transform: "translateY(0)", easing: "cubic-bezier(.28,.72,.36,1)" },
-        { transform: `translateY(-${jumpHeight}px)`, offset: .42, easing: "cubic-bezier(.52,0,.86,.36)" },
-        { transform: "translateY(0)" }
+        { translate: "0 0", easing: "cubic-bezier(.28,.72,.36,1)" },
+        { translate: `0 -${jumpHeight}px`, offset: .42, easing: "cubic-bezier(.52,0,.86,.36)" },
+        { translate: "0 0" }
       ], { duration: airtime, fill: "none" });
       scheduleJump(4000);
     }, delay);
